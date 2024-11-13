@@ -1,4 +1,4 @@
-using Lab1;
+using MKR1;
 using System;
 using Xunit;
 
