@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System;
+using System.IO;
 
-namespace Lab1
+namespace MKR1
 {
     public class Program
     {
@@ -9,15 +11,20 @@ namespace Lab1
         {
             try
             {
-                // Чтение входного файла
-                string input = File.ReadAllText("INPUT.TXT").Trim();
-                int x = int.Parse(input);
+                // Определение относительных путей для входного и выходного файлов
+                string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+                string inputPath = Path.Combine(rootDirectory, "INPUT.TXT");
+                string outputPath = Path.Combine(rootDirectory, "OUTPUT.TXT");
+
+                // Чтение данных из входного файла
+                string[] inputData = getDataFromFile(inputPath);
+                int x = int.Parse(inputData[0].Trim());
 
                 // Получение количества решений
                 int result = GetWaysToRepresentAsSum(x);
 
                 // Запись результата в выходной файл
-                File.WriteAllText("OUTPUT.TXT", result.ToString());
+                File.WriteAllText(outputPath, result.ToString());
 
                 Console.WriteLine($"Количество способов представления {x} как суммы четырех чисел: {result}");
             }
@@ -49,5 +56,12 @@ namespace Lab1
 
             return count;
         }
+
+        // Метод для чтения данных из файла
+        public static string[] getDataFromFile(string path)
+        {
+            return File.ReadAllLines(path);
+        }
     }
 }
+
