@@ -1,3 +1,4 @@
+using Lab1;
 using System;
 using Xunit;
 
